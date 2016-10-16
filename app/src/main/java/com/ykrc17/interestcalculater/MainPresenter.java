@@ -11,6 +11,10 @@ public class MainPresenter {
         this.mView = view;
     }
 
+    public void calcRate(double principal, double payment, int number) {
+        mView.showRate(InterestCalculator.calcRate(principal, payment, number));
+    }
+
     public void calcPayment(double principal, double rate, int number) {
         mView.showPayment(InterestCalculator.calcPayment(principal, rate, number));
     }
@@ -18,7 +22,7 @@ public class MainPresenter {
     public interface View {
         void showPrincipal();
 
-        void showRate();
+        void showRate(double rate);
 
         void showPayment(double payment);
 

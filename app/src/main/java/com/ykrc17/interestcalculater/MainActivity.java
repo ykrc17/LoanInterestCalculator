@@ -63,8 +63,21 @@ public class MainActivity extends Activity implements View.OnClickListener, Main
                 }
                 if (mode == null) {
                     showError();
+                    return;
                 }
                 switch (mode) {
+                    case PRINCIPAL: {
+                        showError("本金都不知道，搞毛啊");
+                        break;
+                    }
+                    case INTEREST_RATE: {
+                        double principal = Double.parseDouble(et_principal.getText().toString());
+//                        double rate = Double.parseDouble(et_interest_rate.getText().toString()) / 100;
+                        double payment = Double.parseDouble(et_payment.getText().toString());
+                        int number = Integer.parseInt(et_payment_number.getText().toString());
+                        mPresenter.calcRate(principal, payment, number);
+                        break;
+                    }
                     case PAYMENT_AMOUNT: {
                         double principal = Double.parseDouble(et_principal.getText().toString());
                         double rate = Double.parseDouble(et_interest_rate.getText().toString()) / 100;
@@ -97,8 +110,8 @@ public class MainActivity extends Activity implements View.OnClickListener, Main
     }
 
     @Override
-    public void showRate() {
-
+    public void showRate(double rate) {
+        et_interest_rate.setText(String.format("%.2f", rate * 100));
     }
 
     @Override
